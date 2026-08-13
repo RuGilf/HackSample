@@ -7,8 +7,8 @@
 * **Ktor**
 * **Gradle Kotlin DSL**
 * **kotlinx.serialization**
-* **PostgreSQL** *(в планах)*
-* **Exposed** *(в планах)*
+* **PostgreSQL**
+* **Docker**
 
 ## 📐 Архитектура
 Основная идея проекта — строгое отделение бизнес-логики от HTTP, базы данных и других внешних компонентов. 
@@ -16,11 +16,23 @@
 Код разделён на несколько независимых слоёв. Структура директории `src/main/kotlin/`:
 
 ```text
-├── application/   # Сценарии использования приложения (Use Cases)
-├── data/          # Реализации источников данных (Репозитории, БД)
-├── domain/        # Бизнес-модели, Value Objects и интерфейсы
-├── presentation/  # HTTP DTO и представление данных (Контроллеры)
-├── Main.kt
-├── Routing.kt
-└── Serialization.kt
+├── application/          # Сценарии использования приложения (Use Cases)
+├── data/                 # Реализации источников данных (Репозитории, БД)
+├── domain/               # Бизнес-модели, Value Objects и интерфейсы
+├── presentation/         # HTTP DTO и представление данных (Контроллеры)
+├── Main.kt               # Точка входа и composition root
+├── Routing.kt            # Настройка эндпоинтов 
+├── StatusPages.kt        # Настройка кастомных Exceptions
+└── Serialization.kt      # Настройка сериализации
 ```
+
+13.08.26
+- Заменил хранение исходного пароля в User на passwordHash.
+- Добавил PasswordHasher и BCryptPasswordHasher для отделения бизнес-логики от конкретной реализации хеширования.
+- Добавил Dockerfile для сборки и запуска Ktor backend в отдельном контейнере.
+- Добавил Docker Compose для совместного запуска backend и PostgreSQL.
+- Настроил передачу конфигурации через .env.
+- Создал DatabaseConfig, который отвечает за чтение и представление настроек подключения к БД.
+- Создал DatabaseFactory, отвечающий за создание подключения к PostgreSQL через Exposed/JDBC.
+- В результате удалось сохранить Main.kt как composition root: он только создаёт зависимости, связывает их и запускает приложение.
+
