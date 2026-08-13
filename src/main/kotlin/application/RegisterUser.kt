@@ -1,5 +1,6 @@
 package application
 
+import application.security.PasswordHasher
 import domain.exception.EmailAlreadyExistsException
 import domain.repository.UserRepository
 import domain.model.User
@@ -8,7 +9,8 @@ import java.util.UUID
 import domain.valueobject.UserId
 
 class RegisterUser(
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val passwordHasher: PasswordHasher
 ) {
     fun execute(
         email: String,
@@ -23,11 +25,13 @@ class RegisterUser(
             throw EmailAlreadyExistsException()
         }
 
+        val passwordHash = passwordHasher.hash(password)
+
         val user = User(
             id = UserId(UUID.randomUUID()),
             email = userEmail,
             username = username,
-            password = password
+            passwordHash = passwordHash
         )
 
         return userRepository.save(user)

@@ -8,5 +8,5 @@ data class User(
     val id: UserId,
     val email: Email,
     val username: String,
-    val password: String
+    val passwordHash: String
 )

@@ -21,6 +21,8 @@ dependencies {
 
     implementation("io.ktor:ktor-server-status-pages")
 
+    implementation("at.favre.lib:bcrypt:0.10.2")
+
     testImplementation(kotlin("test"))
 }
 

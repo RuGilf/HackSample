@@ -1,14 +1,18 @@
 import application.RegisterUser
+import application.security.PasswordHasher
 import data.repository.InMemoryUserRepository
+import data.security.BCryptPasswordHasher
 import domain.repository.UserRepository
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 
 fun main() {
     val userRepository: UserRepository = InMemoryUserRepository()
+    val passwordHasher: PasswordHasher = BCryptPasswordHasher()
 
     val registerUser = RegisterUser(
-        userRepository = userRepository
+        userRepository = userRepository,
+        passwordHasher = passwordHasher
     )
 
     embeddedServer(
