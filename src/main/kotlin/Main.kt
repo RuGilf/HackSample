@@ -2,6 +2,7 @@ import application.RegisterUser
 import application.security.PasswordHasher
 import data.database.DatabaseConfig
 import data.database.DatabaseFactory
+import data.database.DatabaseSchema
 import data.repository.InMemoryUserRepository
 import data.security.BCryptPasswordHasher
 import domain.repository.UserRepository
@@ -10,8 +11,11 @@ import io.ktor.server.netty.Netty
 
 fun main() {
     val databaseConfig = DatabaseConfig.fromEnvironment()
+    val database = DatabaseFactory.connect(
+        databaseConfig
+    )
 
-    DatabaseFactory.connect(databaseConfig)
+    DatabaseSchema.initialze(database)
 
     val userRepository: UserRepository = InMemoryUserRepository()
     val passwordHasher: PasswordHasher = BCryptPasswordHasher()
