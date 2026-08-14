@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    // Плагины
     implementation("io.ktor:ktor-server-core")
     implementation("io.ktor:ktor-server-netty")
 
@@ -27,7 +28,12 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:1.4.0")
     implementation("org.postgresql:postgresql:42.7.13")
 
+
+    // Плагины для тестирования
     testImplementation(kotlin("test"))
+
+    testImplementation("org.testcontainers:testcontainers-postgresql:2.0.5")
+    testImplementation("org.testcontainers:testcontainers-junit-jupiter:2.0.5")
 }
 
 kotlin {

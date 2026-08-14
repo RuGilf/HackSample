@@ -15,7 +15,7 @@ fun main() {
         databaseConfig
     )
 
-    DatabaseSchema.initialze(database)
+    DatabaseSchema.initialize(database)
 
     val userRepository: UserRepository = PostgresUserRepository(database)
     val passwordHasher: PasswordHasher = BCryptPasswordHasher()

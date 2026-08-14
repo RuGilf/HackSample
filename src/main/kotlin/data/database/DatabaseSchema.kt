@@ -6,7 +6,7 @@ import org.jetbrains.exposed.v1.jdbc.SchemaUtils
 import org.jetbrains.exposed.v1.jdbc.transactions.transaction
 
 object DatabaseSchema {
-    fun initialze(database: Database) {
+    fun initialize(database: Database) {
         transaction(database) {
             SchemaUtils.create(UsersTable)
         }
