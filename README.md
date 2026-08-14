@@ -36,3 +36,13 @@
 - Создал DatabaseFactory, отвечающий за создание подключения к PostgreSQL через Exposed/JDBC.
 - В результате удалось сохранить Main.kt как composition root: он только создаёт зависимости, связывает их и запускает приложение.
 
+14.08.26
+Сегодня был очень продуктивный день.
+- Исправил ошибки сборки и запуска backend в Docker.
+- Добавил описание таблицы пользователей `UsersTable` через Exposed.
+- Реализовал `PostgresUserRepository` для сохранения и получения пользователей из PostgreSQL.
+- Добавил `UserMapper` для преобразования данных Exposed (`ResultRow`) в domain-модель `User`.
+- Добавил уникальные `email` и `username`, а также отдельный неуникальный `nickname`.
+- Перешёл на `kotlin.uuid.Uuid` для идентификаторов пользователей.
+- Добавил тесты для `Email` и `Username`.
+- Начал integration-тестирование слоя базы данных с настоящим PostgreSQL через Testcontainers.
