@@ -3,7 +3,7 @@ import application.security.PasswordHasher
 import data.database.DatabaseConfig
 import data.database.DatabaseFactory
 import data.database.DatabaseSchema
-import data.repository.InMemoryUserRepository
+import data.repository.PostgresUserRepository
 import data.security.BCryptPasswordHasher
 import domain.repository.UserRepository
 import io.ktor.server.engine.embeddedServer
@@ -17,7 +17,7 @@ fun main() {
 
     DatabaseSchema.initialze(database)
 
-    val userRepository: UserRepository = InMemoryUserRepository()
+    val userRepository: UserRepository = PostgresUserRepository(database)
     val passwordHasher: PasswordHasher = BCryptPasswordHasher()
 
     val registerUser = RegisterUser(

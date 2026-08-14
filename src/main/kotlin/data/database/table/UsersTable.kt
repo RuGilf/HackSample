@@ -1,10 +1,8 @@
-package data.table
+package data.database.table
 
 import org.jetbrains.exposed.v1.core.Table
-import org.jetbrains.exposed.v1.core.java.javaUUID
-import kotlin.uuid.Uuid
 
-object UserTable : Table("users") {
+object UsersTable : Table("users") {
     val id = uuid("id")
 
     val email = varchar(
