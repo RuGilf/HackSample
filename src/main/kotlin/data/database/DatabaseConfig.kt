@@ -8,7 +8,7 @@ class DatabaseConfig(
     val password: String
 ) {
     val jdbcUrl: String
-        get() = "jdbc:postgresql://\$host:\$port/\$name"
+        get() = "jdbc:postgresql://$host:$port/$name"
 
     companion object {
         fun fromEnvironment(): DatabaseConfig {
