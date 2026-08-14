@@ -28,6 +28,7 @@ fun Application.configureRouting(
             val user = registerUser.execute(
                 email = request.email,
                 username = request.username,
+                nickname = request.nickname,
                 password = request.password
             )
 
@@ -36,7 +37,8 @@ fun Application.configureRouting(
                 RegisterResponse(
                     id = user.id.value.toString(),
                     email = user.email.value,
-                    username = user.username
+                    username = user.username.value,
+                    nickname = user.nickname
                 )
             )
         }

@@ -1,4 +1,5 @@
 import domain.exception.EmailAlreadyExistsException
+import domain.exception.UsernameAlreadyExistsException
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.plugins.statuspages.StatusPages
@@ -24,6 +25,16 @@ fun Application.configureStatusPages() {
                 ErrorResponse(
                     message = exception.message
                         ?: "Invalid request"
+                )
+            )
+        }
+
+        exception<UsernameAlreadyExistsException> { call, exception ->
+            call.respond(
+                HttpStatusCode.Conflict,
+                ErrorResponse(
+                    message = exception.message
+                        ?: "User with this username already exists"
                 )
             )
         }

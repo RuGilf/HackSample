@@ -2,9 +2,10 @@ package data.table
 
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.core.java.javaUUID
+import kotlin.uuid.Uuid
 
 object UserTable : Table("users") {
-    val id = javaUUID("id")
+    val id = uuid("id")
 
     val email = varchar(
         name = "email",
@@ -13,13 +14,18 @@ object UserTable : Table("users") {
 
     val username = varchar(
         name = "username",
-        length = 50
+        length = 32
+    ).uniqueIndex()
+
+    val nickname = varchar(
+        name = "nickname",
+        length = 64
     )
 
     val passwordHash = varchar(
         name = "password_hash",
         length = 255
-    ).uniqueIndex()
+    )
 
     override val primaryKey = PrimaryKey(id)
 }

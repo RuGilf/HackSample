@@ -1,8 +1,14 @@
 package domain.valueobject
 
-import java.util.UUID
+import kotlin.uuid.Uuid
 
 @JvmInline
 value class UserId(
-    val value: UUID
-)
+    val value: Uuid
+) {
+    companion object {
+        fun random(): UserId {
+            return UserId(Uuid.random())
+        }
+    }
+}

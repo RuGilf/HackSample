@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 class RegisterRequest(
     val email: String,
     val username: String,
+    val nickname: String,
     val password: String
 ) {
 }
